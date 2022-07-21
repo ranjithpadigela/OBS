@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="{% static 'Style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+{% include 'navbaradmn.html' %}
+<form action="{% url 'deletebook' %}" method="get">
+    {% csrf_token %}
+    <center>
+    <table bgcolor="gray">
+       <tr><td>Enter bid:</td><td><input type="text" name="t1" ></td></tr>
+        <tr><td colspan="2" align="center"><input type="submit" value="Delete Book" ></td></tr>
+    </table>
+        </center>
+</form>
+</body>
+</html>
