@@ -122,7 +122,7 @@ def addtocart(request, pk):
                 customer=c,
             )
         reqcart.books.add(book)
-    return redirect('viewcart')
+    return redirect('/')
 
 def Removecart(request, pk):
     book = Book.objects.get(bid=pk)
@@ -139,7 +139,7 @@ def Removecart(request, pk):
                 customer=c,
             )
         reqcart.books.remove(book)
-    return redirect('/')
+    return redirect('viewcart')
 
 
 def viewcart(request):
