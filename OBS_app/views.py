@@ -122,7 +122,26 @@ def addtocart(request, pk):
                 customer=c,
             )
         reqcart.books.add(book)
+    return redirect('viewcart')
+
+def Removecart(request, pk):
+    book = Book.objects.get(bid=pk)
+    cust = Customer.objects.filter(user=request.user)
+    for c in cust:
+        carts = Cart.objects.all()
+        reqcart = ''
+        for cart in carts:
+            if (cart.customer == c):
+                reqcart = cart
+                break
+        if (reqcart == ''):
+            reqcart = Cart.objects.create(
+                customer=c,
+            )
+        reqcart.books.remove(book)
     return redirect('/')
+
+
 def viewcart(request):
     cust = Customer.objects.filter(user=request.user)
     for c in cust:

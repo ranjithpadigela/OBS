@@ -9,33 +9,39 @@
 </head>
 <body>
 {% include 'navbar.html' %}
-<div class="container">
-    <div class="row">
-        <div class="col-lg-10">
-            <br>
-            <h5>BOOKS:</h5>
-            <div class="card card-body">
-                <table class="table table-sm">
-                    <tr>
-                        <th>Title</th>
-                        <th>Author</th>
-                        <th>Price</th>
-                        <th>Edition</th>
-                        <th>Date Published</th>
-                    </tr>
-                    {% for book in cart.books.all %}
-                    <tr>
-                        <td>{{book.title}} </td>
-                        <td>{{book.Author}} </td>
-                        <td>{{book.Price}} </td>
-                        <td>{{book.Edition}} </td>
-                        <td>{{ book.date }}</td>
-                    </tr>
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
+{% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissable fade show" role="alert">
+    {{ message.signout }}
     </div>
+{% endfor %}
+<br>
+ <div class="container">
+    <div class="row">
+    <div class="col-lg-10">
+<div class="card card-body">
+<table class="table table-sm" align="center">
+    <tr>
+        <th>Book ID</th>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Price</th>
+        <th>Edition</th>
+        <th>Date Published</th>
+    </tr>
+    {% for book in cart.books.all %}
+        <tr>
+            <td>{{ book.bid }}</td>
+            <td><b>{{book.title}}</b> </td>
+            <td>{{book.Author}} </td>
+            <td>{{book.Price}} </td>
+            <td> {{book.Edition}} </td>
+            <td>{{ book.pub_date }}</td>
+        </tr>
+    {% endfor %}
+</table>
 </div>
+    </div>
+    </div>
+ </div>
 </body>
 </html>

@@ -20,7 +20,7 @@ class Customer(models.Model):
     cphone = models.CharField(max_length=200,null=True)
     cemail = models.CharField(max_length=200,null=True)
     cAddress = models.CharField(max_length=200,null=True)
-
+    profile_pic = models.ImageField(null=True, blank=True)
     cdate_created = models.DateTimeField(auto_now_add=True,null=True)
 
     def __str__(self):
