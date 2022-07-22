@@ -36,6 +36,9 @@
             <td>{{book.Price}} </td>
             <td> {{book.Edition}} </td>
             <td>{{ book.pub_date }}</td>
+         {% if request.user.is_authenticated %}
+        <td><a class="btn btn-sm btn-info" href="{% url 'remove'  book.bid  %}">Remove from cart</a> </td>
+        {% endif %}
         </tr>
     {% endfor %}
 </table>
