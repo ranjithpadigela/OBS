@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
    <a href="{% url 'home' %}" class="navbar-brand" >Home</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,8 +20,8 @@
         {% if request.user.is_authenticated %}
         <a href="{% url 'viewcart' %}" class="nav-link"><i class="fa fa-shopping-cart"></i>Cart</a>
         {% endif %}
-        <a href="#" class="nav-link"><i class="fa fa-phone"></i>Contact Us</a>
-        <a href="#" class="nav-link"><i class="fa fa-info"></i>About Us</a>
+        <a href="{% url 'ContactUs' %}" class="nav-link"><i class="fa fa-phone"></i>Contact Us</a>
+        <a href="{% url 'AboutUs' %}" class="nav-link"><i class="fa fa-info"></i>About Us</a>
       </div>
     </div>
   </div>

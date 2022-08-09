@@ -6,6 +6,7 @@ class Book(models.Model):
     title = models.CharField(max_length=200,null=True)
     Author = models.CharField(max_length=200, null=True)
     Price = models.DecimalField(max_digits=12,decimal_places=4)
+    #book_pic = models.ImageField(null=True, blank=True)
     Edition = models.IntegerField()
     pub_date = models.DateField()
     #Image =models.ImageField()
@@ -37,6 +38,16 @@ class Cart(models.Model):
 class Orders(models.Model):
     orderid = models.IntegerField()
     books = models.ManyToManyField(Book)
-
     def __str__(self):
         return str(self.books)
+
+class DeliverAddress(models.Model):
+    username = models.CharField(max_length=100, null=True)
+    phone = models.CharField(max_length=10,null=True)
+    pincode = models.CharField(max_length=6,null=True)
+    Locality = models.CharField(max_length=100,null=True)
+    Address = models.CharField(max_length=200,null=True)
+    cityDictrictTown = models.CharField(max_length=100,null=True)
+    state = models.CharField(max_length=100,null=True)
+    Landmark = models.CharField(max_length=200,blank=True)
+    Alternate_phone = models.CharField(max_length=10,blank=True)

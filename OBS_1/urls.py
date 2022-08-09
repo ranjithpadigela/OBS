@@ -16,6 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from OBS_app.views import *
+admin.site.site_header = "Online Book Store Admin"
+admin.site.site_title  = "Online Book Store Portal"
+admin.site.index_title = "Welcome to Online Book Store"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
@@ -33,5 +36,9 @@ urlpatterns = [
     path('signin', signin, name='signin'),
     path('signout', signout, name='signout'),
     path('adminpage',Adminpage,name='adminpage'),
-    path('customerpage',Customerpage,name='customerpage')
+    path('customerpage',Customerpage,name='customerpage'),
+    path('orderpage/<str:pk>/',Buy,name='Buy'),
+    path('AddingAdress',AddingAdress,name='Addrs'),
+    path('Contactpage',contactUs,name='ContactUs'),
+    path('Aboutuspage',AboutUs,name='AboutUs')
 ]

@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.contrib.auth import login, logout, authenticate
@@ -6,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .models import *
 from .forms import *
+
 # Create your views here.
 def home(request):
     books = Book.objects.all()
@@ -13,7 +15,7 @@ def home(request):
     return render(request, 'Home.html', context)
 
 def Adminpage(request):
-    return render(request, 'adminpage.html')
+    return render(request, 'adminpage')
 
 def Adminhome(request):
     books = Book.objects.all()
@@ -63,8 +65,14 @@ def signout(request):
     messages.success(request,"Logged out successfully")
     return redirect('home')
 
+def contactUs(request):
+    return render(request,'contactus.html')
+
 def Addbook(request):
     return render(request,'addbook.html')
+
+def AboutUs(request):
+    return render(request,'aboutus.html')
 
 def addbook(request):
     b_id = request.GET['t1']
@@ -73,7 +81,7 @@ def addbook(request):
     bprice = request.GET['t4']
     bedition = request.GET['t5']
     bdate = request.GET['t6']
-    #bimage = request.POST['b5']
+    #bimage = request.POST['t7']
     b = Book(bid=b_id,title=btitle,Author=bauthor,Price=bprice,Edition=bedition,pub_date=bdate)
     b.save()
     return render(request,'bookadmsg.html')
@@ -122,6 +130,7 @@ def addtocart(request, pk):
                 customer=c,
             )
         reqcart.books.add(book)
+        messages.success(request,"Added to cart")
     return redirect('/')
 
 def Removecart(request, pk):
@@ -129,16 +138,17 @@ def Removecart(request, pk):
     cust = Customer.objects.filter(user=request.user)
     for c in cust:
         carts = Cart.objects.all()
-        reqcart = ''
         for cart in carts:
             if (cart.customer == c):
                 reqcart = cart
                 break
         if (reqcart == ''):
-            reqcart = Cart.objects.create(
+            reqcart = Cart.objects.delete(
                 customer=c,
             )
         reqcart.books.remove(book)
+        if reqcart == '':
+            return render(request,'emptycart.html')
     return redirect('viewcart')
 
 
@@ -156,4 +166,28 @@ def viewcart(request):
                 return render(request,'emptycart.html')
 
 
+def Buy(request,pk):
+    book = Book.objects.get(bid=pk)
+    cust = Customer.objects.filter(user=request.user)
+    for c in cust:
+        Order = Orders.objects.all()
+        for od in Order:
+            if (od.customer == c):
+                reqcart = od
+        #reqcart.book.add(book)
+    return render(request,'Order.html')
 
+def AddingAdress(request):
+    name = request.POST['username']
+    Aphone = request.POST['phone']
+    Apincode = request.POST['pincode']
+    ALocality = request.POST['locality']
+    Aaddress = request.POST['Address']
+    Acity = request.POST['cityDistrictTown']
+    Astatelist = request.POST['statelist']
+    ALandmark = request.POST['Landmark']
+    Aaltphone = request.POST['AlternatePhone']
+
+    A = DeliverAddress(username=name,phone=Aphone,pincode=Apincode,Locality=ALocality,Address=Aaddress,cityDictrictTown=Acity,state=Astatelist,Landmark=ALandmark,Alternate_phone=Aaltphone)
+    A.save()
+    return HttpResponse("Thank you for purchasing")

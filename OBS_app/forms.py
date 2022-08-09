@@ -1,4 +1,4 @@
-from django.forms import ModelForm
+from django.forms import ModelForm,ChoiceField,RadioSelect
 from .models import *
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
@@ -21,3 +21,4 @@ class createbookform(ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+

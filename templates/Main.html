@@ -2,13 +2,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <title>Home</title>
     <link rel="stylesheet" href="{% static 'Style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 {% include 'navbar.html' %}
+{% for message in messages %}
+    <h3 class="alert alert-success alert-dismissable" align="center">{{ message }}</h3>
+{% endfor %}
 {% block content %}
 {% endblock %}
 <!--
@@ -32,10 +34,6 @@
         <img src="{% static 'images/15.jpg' %}" class="i1">
         <img src="{% static 'images/16.jpg' %}" class="i1">
     </div>-->
-    <div>
-        <marquee>
-            <h3>Copyright@onlinebookstore</h3>
-        </marquee>
-    </div>
+
 </body>
 </html>
